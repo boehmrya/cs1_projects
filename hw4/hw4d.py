@@ -75,14 +75,55 @@ def mostFrequentWords(wordList, frequencyList, k):
           
                 
 
-def test():
-     filename = 'test.txt'
-     masterWordList = computeWordFrequencies(filename)
-     wordList = masterWordList[0]
-     frequencyList = masterWordList[1]
-     k = 10
-     mostFrequent = mostFrequentWords(wordList, frequencyList, k)
-     print(mostFrequent)
+def main():
+    # number of most frequent words to process
+    k = 20
+    
+    # process tolstoy first
+    war = 'war.txt'
+    masterWordList = computeWordFrequencies(war)
+    wordList = masterWordList[0]
+    frequencyList = masterWordList[1]
+    tolstoyMostFrequent = mostFrequentWords(wordList, frequencyList, k)
+    print("Tolstoy's 20 most frequent words are: ", tolstoyMostFrequent)
 
+    # process stevenson second
+    # start with hyde
+    hyde = 'hyde.txt' 
+    hydeWordList = computeWordFrequencies(hyde)
+    hydeWords = hydeWordList[0]
+    hydeFreq = hydeWordList[1]
+    hydeMostFrequent = mostFrequentWords(hydeWords, hydeFreq, k)
 
-test()
+    # then process treasure
+    treasure = 'treasure.txt' 
+    treasureWordList = computeWordFrequencies(treasure)
+    treasureWords = treasureWordList[0]
+    treasureFreq = treasureWordList[1]
+    treasureMostFrequent = mostFrequentWords(treasureWords, treasureFreq, k)
+
+    # then combine treasure and hyde for stevenson analysis
+    steveTempWords = hydeWords + treasureWords
+    steveTempFreq = hydeFreq + treasureFreq
+    steveFinalWords = []
+    steveFinalFreq = []
+    index = 0
+    while index < len(steveTempWords):
+        # if the final word list has the current word
+        # compare the frequencies and replace the old with the new if
+        # the new words has a greater frequency
+        if steveTempWords[index] in steveFinalWords:
+            if steveTempFreq[index] > steveFinalFreq[index]:
+                steveFinalWords[index] = steveTempWords[index]
+                steveFinalFreq[index] = steveTempFreq[index]
+        else:
+            steveFinalWords.append(steveTempWords[index])
+            steveFinalFreq.append(steveTempFreq[index])
+        index += 1
+
+    steveMostFrequent = mostFrequentWords(steveFinalWords, steveFinalFreq, k)
+    print("Stevenson's 20 most frequent words are: ", steveFinalWords)
+             
+             
+     
+main()
