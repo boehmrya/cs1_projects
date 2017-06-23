@@ -1,5 +1,3 @@
-
-
 # Parses a line and extracts words from the line into a list. Any word that is
 # extracted needs to be at least 4 letters long. Also, all extracted words are
 # converted into all-lower-case before being inserted into the list.
