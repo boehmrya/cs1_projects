@@ -100,6 +100,37 @@ def rotateLeft(matrix):
 # rotates a rectangular two-dimensional list 180 degrees
 def rotate180(matrix):
      newMatrix = []
+     i = (len(matrix) - 1)
+     while i >= 0:
+          newSubMatrix = []
+          j = (len(matrix[i]) - 1)
+          while j >= 0:
+               newSubMatrix.append(matrix[i][j])
+               j -= 1
+          newMatrix.append(newSubMatrix)
+          i -= 1
+     return newMatrix
+
+
+# transposes a rectangular two-dimensional list
+def transpose(matrix):
+     newMatrix = []
+     numCols = len(matrix[0])
+     i = 0
+     while i < numCols:
+          newSubMatrix = []
+          j = 0
+          while j < len(matrix):
+               k = (len(matrix[j]) - 1)
+               while k >= 0:
+                    if k == i:
+                         newSubMatrix.append(matrix[j][k])
+                    k -= 1
+               j += 1
+          newMatrix.append(newSubMatrix)
+          i += 1
+     return newMatrix
+     
           
                    
 
@@ -117,7 +148,9 @@ def main():
                 [9,10,11,12]]
      #print(flipH(matrix2))
      #print(flipV(matrix3))
-     print(rotateLeft(matrix3))
+     #print(rotateLeft(matrix3))
+     #print(rotate180(matrix3))
+     print(transpose(matrix3))
 
      
 
